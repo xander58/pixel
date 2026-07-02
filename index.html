@@ -1,1 +1,76 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Компрессор - Сжатие изображений</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <h1>Компрессор</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">Быстрое сжатие изображений прямо в браузере</p>
+    
+    <div class="drop-zone" id="dropZone">
+        <p style="font-size: 18px; margin: 0 0 10px 0;">Перетащите изображения сюда</p>
+        <p style="margin: 0; color: #666;">или кликните для выбора файлов</p>
+        <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
+    </div>
+    
+    <div id="progressContainer" style="display: none;">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText" style="text-align: center; margin: 10px 0; font-size: 14px;"></p>
+    </div>
+    
+    <div class="actions" id="actionsBar" style="display: none;">
+        <button class="btn-download-all" id="downloadAllBtn">Скачать все архивом</button>
+        <button class="btn-clear" id="clearBtn">Очистить результаты</button>
+    </div>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label>Формат:</label>
+            <select id="format">
+                <option value="image/webp">WebP (рекомендуется)</option>
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/png">PNG</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>Качество: <span id="qualityValue">0.8</span></label>
+            <input type="range" id="quality" min="0.5" max="1" step="0.05" value="0.8">
+        </div>
+        
+        <div class="control-group">
+            <label>Целевой размер (KB):</label>
+            <input type="number" id="targetSize" min="10" max="10000" value="500" style="width: 120px;">
+        </div>
+        
+        <div class="control-group">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="useTargetSize" style="width: auto;">
+                Подогнать под целевой размер
+            </label>
+        </div>
+        
+        <div class="control-group">
+            <label>Макс. ширина (px):</label>
+            <input type="number" id="maxWidth" min="100" max="5000" value="1920" style="width: 120px;">
+        </div>
+        
+        <div class="control-group">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="useResize" style="width: auto;">
+                Изменить размер
+            </label>
+        </div>
+    </div>
+    
+    <div class="results" id="results"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
